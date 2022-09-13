@@ -68,12 +68,6 @@ class Employee(models.Model):
     def __str__(self):
         return f'{self.full_name}'
     
-    # create next appraisal date
-    # def save(self, *args, **kwargs):
-    #     today = datetime.now()
-    #     self.next_appraisal = today + relativedelta(months=+6)
-    #     return super().save( *args, **kwargs)
-    
     # auto generated badge id
     def save(self, *args, **kwargs):
         while not self.badge_id:

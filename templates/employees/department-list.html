@@ -19,6 +19,13 @@
                         <button type="button" class="btn btn-secondary" data-bs-toggle="popover" data-bs-placement="right" data-bs-custom-class="custom-popover" title="Let's create your Department" data-bs-content="This popover is themed via CSS variables.">
                             <a href="{% url 'employee:create-dept' %}" style="text-decoration: none;color:white">Create</a>
                         </button>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="popover" data-bs-placement="right" data-bs-custom-class="custom-popover" title="Download Department Records" data-bs-content="This popover is themed via CSS variables.">
+                            <a href="{% url 'employee:csv-dept' %}" style="text-decoration: none;color:white"><i class="bi bi-download"></i></a>
+                        </button>
+                    {% elif group.name == "Administration" %}
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="popover" data-bs-placement="right" data-bs-custom-class="custom-popover" title="Download Department Records" data-bs-content="This popover is themed via CSS variables.">
+                            <a href="{% url 'employee:csv-dept' %}" style="text-decoration: none;color:white"><i class="bi bi-download"></i></a>
+                        </button>
                     {% endif %}
                 {% endfor %}
             </div>

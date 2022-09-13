@@ -1,5 +1,4 @@
-from tokenize import group
-from unicodedata import name
+from urllib import response
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required, permission_required
 from usersapp.decorators import *
@@ -8,6 +7,9 @@ from .models import *
 from django.contrib.auth.models import Group, Permission, User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages 
+from django.http import HttpResponse
+import csv
+
 
 # Create your views here.
 """
@@ -412,3 +414,64 @@ def contract_view(request, id):
         'form': form
     }
     return render(request, 'employees/contract-view.html', data)
+
+# function to export employee records to csv
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Staff','Manager'])
+def employee_record(request):
+    
+    response = HttpResponse(content_type="text/csv")
+    writer = csv.writer(response)
+    writer.writerow(['User ID', 'FullName', 'Email', 'Mobile', 'Gender', 'Department ID', 'Job Position ID', 'Manager ID', 'Level', 'Badge ID'])
+    # fetch oject from database and write to file
+    for employee in Employee.objects.all().values_list('user', 'full_name', 'email', 'mobile', 'gender', 'dept', 'job_position', 'dept_coach', 'level', 'badge_id'):
+        writer.writerow(employee)
+        
+    response['Content-Disposition'] = 'attachment; filename="employees.csv"'
+    return response
+
+# function to export department record to csv
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Manager','Staff'])
+def dept_record(request):
+    
+    response = HttpResponse(content_type="text/csv")
+    writer = csv.writer(response)
+    writer.writerow(['Department ID', 'Department Name', 'Manager ID'])
+    # fetch dept table from database and write to csv
+    for dept in Department.objects.all().values_list('id', 'name', 'manager'):
+        writer.writerow(dept)
+        
+    response['Content-Disposition'] = 'attachment; filename="departments.csv"' 
+    return response
+
+# function export job position function to csv
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Manager','Staff'])
+def jobposition_record(request):
+    
+    response = HttpResponse(content_type='text/csv')
+    writer = csv.writer(response)
+    writer.writerow(['JobPosition ID', 'Job Position', 'Job Description'])
+    # fetch job position from database
+    for position in JobPosition.objects.all().values_list('id', 'name', 'job_description'):
+        writer.writerow(position)
+        
+    response['Content-Disposition'] = 'attachment; filename="jobposition.csv"'
+    return response
+
+# fucntion to export employee contract to csv
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Manager','Staff'])
+def contract_record(request):
+    
+    response = HttpResponse(content_type='text/csv')
+    writer = csv.writer(response)
+    writer.writerow(['Contract ID', 'Contract Ref', 'Employee ID', 'Department', 'Job Position', 'Acc No', 'Bank Name', 'Salary Type', 'Salary Details', 'Start Date', 'End Date', 'Status'])
+    # fetch data from database
+    for contract in EmployeeContract.objects.all().values_list('id', 'contract_reference', 'employee', 'department', 'job_position', 'acc_no', 'bank_name', 'salary_type', 'salary_details', 'start_date', 'end_date', 'status'):
+        writer.writerow(contract)
+        
+    response['Content-Disposition'] = 'attachment; filename="employeecontract.csv"'
+    return response
+    

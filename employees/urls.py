@@ -23,5 +23,9 @@ urlpatterns = [
     path('employee-contract/', views.contract_index, name='list-contract'),
     path('create-contract/', views.create_contract, name='create-contract'),
     path('contract-view/<str:id>/', views.contract_view, name='view-contract'),
+    path('csv-employee', views.employee_record, name='csv-employee'),
+    path('csv-dept', views.dept_record, name='csv-dept'),
+    path('csv-jobposition', views.jobposition_record, name='csv-jobposition'),
+    path('csv-employeecontract', views.contract_record, name='csv-employeecontract'),
     # path('jsi18n', JavaScriptCatalog.as_view(), name='js-catlog')
 ]
