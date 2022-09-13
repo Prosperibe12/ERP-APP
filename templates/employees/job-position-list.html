@@ -1,0 +1,111 @@
+{% extends "employeebase.html" %}
+{% load static %}
+{% block style %}
+
+{% endblock style %}
+{% block title %}
+    {{Title}}
+{% endblock title %}
+
+{% block container %}
+<section id="section-vendor">
+    <div class="container-fluid">
+        <!-- filters and search sections -->
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="h5 py-2">Job Positions</div>
+                {% for group in request.user.groups.all %}
+                    {% if group.name == "HR & Development" %}
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="popover" data-bs-placement="right" data-bs-custom-class="custom-popover" title="Let's create your Job Positions" data-bs-content="This popover is themed via CSS variables.">
+                            <a href="{% url 'employee:create-position' %}" style="text-decoration: none;color:white">Create</a>
+                        </button>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-md-6">
+                <input class="form-control pt-2" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+                <datalist id="datalistOptions">
+                    <option value="San Francisco">
+                    <option value="New York">
+                    <option value="Seattle">
+                    <option value="Los Angeles">
+                    <option value="Chicago">
+                </datalist>
+                <div class="mt-2">
+                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                        <div class="btn-group p-2" role="group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-filter"></i>Filters
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <li><a class="dropdown-item" href="">Purchase</a></li>
+                            <li><a class="dropdown-item" href="">Purchase Orders</a></li>
+                            <li><a class="dropdown-item" href="">RFQs</a></li>
+                            <li><a class="dropdown-item" href="">Requisition</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group p-2" role="group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-bars"></i> Group By
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <li><a class="dropdown-item" href="">Vendor</a></li>
+                            <li><a class="dropdown-item" href="">Purchase Representative</a></li>
+                            </ul>
+                        </div>
+                    
+                        <div class="btn-group p-2" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-star-fill"></i> Favorites
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <li><a class="dropdown-item" href="">Dropdown link</a></li>
+                            <li><a class="dropdown-item" href="">Dropdown link</a></li>
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of filters and search sections -->
+        <hr class="m-0">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                {% if jobposition %}
+                    <table class="table table-hover table-stripped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="custom-control">
+                                        <input type="checkbox" name="" id="">
+                                    </div>
+                                </th>
+                                <th>Job Position</th>
+                                <th>Current Number of Employees</th>
+                                <th>Company Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                {% for position in jobposition %}
+                                    <tr>
+                                        <th>
+                                            {{forloop.counter}}
+                                        </th>
+                                        <td><a href="{% url 'employee:view-position' position.id %}" class="text-decoration-none text-dark">{{position.name}}</a></td>
+                                        <td><a href="{% url 'employee:view-position' position.id %}" class="text-decoration-none text-dark"></a></td>
+                                        <td><a href="{% url 'employee:view-position' position.id %}" class="text-decoration-none text-dark">Relational Technologies 
+                                    </tr>
+                                {% endfor %}                                            
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="col-md-5 mx-auto mt-3">
+                        <h5 class="text-center">Create a new Department in your Department Directory.</h5>
+                        <p class="lead text-center">This app helps you easily track all activities related to a Department.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock container %}

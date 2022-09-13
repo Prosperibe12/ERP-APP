@@ -1,0 +1,181 @@
+{% extends "employeebase.html" %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+    {{Title}}
+{% endblock title %}
+
+{% block container %}
+    <section id="section-vendor">
+        <div class="container-fluid">
+            <!-- filters and search sections -->
+            <div class="row justify-content-center">
+                <nav aria-label="breadcrumb" class="mt-3">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="{% url 'employee:list-contract' %}" class="lead">Contracts</a></li>
+                      <li class="breadcrumb-item active text-muted" aria-current="page">{{contract.employee}}</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- end of filters and search sections -->
+        </div>
+        <hr class="mt-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mx-auto border">
+                    <!-- submenu icons -->
+                    <div class="row">
+                        {% if contract.status == "New" %}
+                            <div class="col-4 col-md-1 ms-auto stat bg-secondary">
+                                <a href="" id="orders-count" class="d-flex align-items-center justify-content-center">
+                                    <div class="text-center mx-1">
+                                        <span class="purchase order-count color-danger"></span><br>                                
+                                        <span class="fw-bold text-white">New</span>
+                                    </div>
+                                </a>
+                            </div>
+                        {% else %}
+                            <div class="col-4 col-md-1 ms-auto stat" style="background-color: #EAF4F4">
+                                <a href="" id="orders-count" class="d-flex align-items-center justify-content-center">
+                                    <div class="text-center mx-1">
+                                        <span class="purchase order-count color-danger"></span><br>                                
+                                        <span class="fw-bold">New</span>
+                                    </div>
+                                </a>
+                            </div> 
+                        {% endif %}
+                        {% if contract.status == "Running" %}
+                            <div class="col-4 col-md-1 stat bg-success">
+                                <a href="" id="orders-count" class="d-flex align-items-center justify-content-center">
+                                    <div class="text-center mx-1">
+                                        <span class="purchase order-count bg-success"></span><br>
+                                        <span class="fw-bold text-white">Running</span>
+                                    </div>                               
+                                </a>
+                            </div>                          
+                        {% else %}
+                            <div class="col-4 col-md-1 stat" style="background-color: #EAF4F4">
+                                <a href="" id="orders-count" class="d-flex align-items-center justify-content-center">
+                                    <div class="text-center mx-1">
+                                        <span class="purchase order-count bg-success"></span><br>
+                                        <span>Running</span>
+                                    </div>                               
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if contract.status == "Expired" %}
+                            <div class="col-4 col-md-1 stat bg-danger">
+                                <a href="" id="orders-count" class="d-flex align-items-center justify-content-center">
+                                    <div class="text-center mx-1">
+                                        <span class="purchase order-count bg-success"></span><br>
+                                        <span class="fw-bold text-white">Expired</span>
+                                    </div>                               
+                                </a>
+                            </div>                          
+                        {% else %}
+                            <div class="col-4 col-md-1 stat" style="background-color: #EAF4F4">
+                                <a href="" id="orders-count" class="d-flex align-items-center justify-content-center">
+                                    <div class="text-center mx-1">
+                                        <span class="purchase order-count bg-success"></span><br>
+                                        <span class="fw-bold">Expired</span>
+                                    </div>                               
+                                </a>
+                            </div>
+                        {% endif %}                                            
+                    </div>
+                    <div class="row border justify-content-center mb-2 p-2">
+                        <div class="m-2 col-md-8">
+                            <label for="" class="form-label fw-bold">Contract Reference: </label>
+                            <p class="lead">{{contract.contract_reference}}</p>
+                        </div>
+                        <div class="m-2 col-md-2">
+                        </div>
+                        <!-- full_name -->
+                        <div class="m-2 col-md-5">
+                            <label for="" class="form-label fw-bold">Employee: </label>
+                            <p class="lead">{{contract.employee}}</p>
+                        </div>
+                        <!-- profile_pix -->
+                        <div class="m-2 col-md-5">
+                            <label for="" class="form-label fw-bold">Start Date: </label>
+                            <p class="lead">{{contract.start_date}}</p>
+                        </div>
+                        <!-- email -->
+                        <div class="m-2 col-md-5">
+                            <label for="" class="form-label fw-bold">Department: </label>
+                            <p class="lead">{{contract.department}}</p>
+                        </div>
+                        <!-- phone no -->
+                        <div class="m-2 col-md-5">
+                            <label for="" class="form-label fw-bold">End Date: </label>
+                            <p class="lead">{{contract.end_date}}</p>
+                        </div>
+                        <!-- dept -->
+                        <div class="m-2 col-md-5">
+                            <label for="" class="form-label fw-bold">Job Position: </label>
+                            <p class="lead">{{contract.job_position}}</p>
+                        </div>
+                        <!-- manager-->
+                        <div class="m-2 col-md-5">
+                            <label for="" class="form-label fw-bold">Working Schedule: </label>
+                             <p class="lead">Standard 40 hours/week</p>
+                        </div>
+                        <!-- badge -->
+                        <div class="m-2 col-md-5">
+                            <label for="" class="form-label fw-bold">Salary Structure Type: </label>
+                            <p class="lead">{{contract.salary_type}}</p>
+                        </div>
+                        <div class="m-2 col-md-5">
+                            
+                        </div>
+                        <div class="m-2 col-md-5">
+                            <label for="" class="form-label fw-bold">Salary Information: </label>
+                            <p class="lead">
+                               N{{contract.salary_details | intcomma}} / Month
+                            </p>
+                        </div>
+                        <div class="m-2 col-md-5">
+
+                        </div>
+                    </div>
+                    <div class="mb-1 col-md-5">
+                        {% for group in request.user.groups.all %}
+                            {% if group.name == "HR & Development" %}
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" id="action">Update</button>
+                                {% if perms.employees.delete_employeecontract %}
+                                    <button type="button" class="btn" data-bs-toggle="popover" data-bs-placement="right" data-bs-custom-class="custom-popover" id="action" data-bs-content="This popover is themed via CSS variables.">
+                                        <a href="" style="text-decoration: none;color:white">Delete</a>
+                                    </button> 
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Contract</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <div class="modal-footer">
+                            <button type="submit" class="btn" id="action">Update</button>
+                            <button type="button" class="btn" data-bs-dismiss="modal" id="action">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock container %}
+{% block js_js %}
+{% endblock js_js %}

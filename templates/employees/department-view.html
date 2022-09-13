@@ -1,0 +1,87 @@
+{% extends "employeebase.html" %}
+{% load static %}
+{% block style %}
+    <style>
+        .errorlist li{
+            color: red;
+        }
+    </style>
+{% endblock style %}
+{% block title %}
+    {{Title}}
+{% endblock title %}
+
+{% block container %}
+    <section id="section-vendor">
+        <div class="container-fluid">
+            <!-- filters and search sections -->
+            <div class="row justify-content-center">
+                <nav aria-label="breadcrumb" class="mt-3">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="{% url 'employee:department-list' %}" class="lead">Department</a></li>
+                      <li class="breadcrumb-item active text-muted" aria-current="page">{{dept_view.name}}</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- end of filters and search sections -->
+        </div>
+        <hr class="m-0">
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 mx-auto border">
+                    <div class="row g-3 mt-1">
+                        {% if dept_view %}
+                            <div class="col-md-6 mt-3">
+                                <label for="" class="form-label fw-bold">Department Name:</label> {{dept_view.name}}
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <label for="" class="form-label fw-bold">Manager:</label> {{dept_view.manager}}
+                            </div>
+                            <div class="mb-1 col-md-5">
+                                {% for group in request.user.groups.all %}
+                                    {% if group.name == "HR & Development" %}
+                                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" id="action">Update</button>
+                                        {% if perms.employees.delete_department %}
+                                            <button type="button" class="btn" data-bs-toggle="popover" data-bs-placement="right" data-bs-custom-class="custom-popover" id="action" data-bs-content="This popover is themed via CSS variables.">
+                                                <a href="{% url 'employee:dept-delete' dept_view.id %}" style="text-decoration: none;color:white">Delete</a>
+                                            </button>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+       <!-- modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Department</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Department Name:</label>
+                            {{form.name}} <br> {{form.name.errors}}
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Manager:</label> <br>
+                            {{form.manager}} <br> {{form.manager.errors}}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn" id="action">Update</button>
+                            <button type="button" class="btn" data-bs-dismiss="modal" id="action">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock container %}

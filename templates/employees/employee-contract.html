@@ -1,0 +1,114 @@
+{% extends "employeebase.html" %}
+{% load static %}
+{% block title %}
+    {{Title}}
+{% endblock title %}
+
+{% block container %}
+     <!-- section content -->
+     <section id="section-vendor">
+        <div class="container-fluid">
+            <!-- filters and search sections -->
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="h5 py-2">Contracts</div>
+                    {% for group in request.user.groups.all %}
+                        {% if group.name == "HR & Development" %}
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="popover" data-bs-placement="right" data-bs-custom-class="custom-popover" title="Let's create your Employee Contract" data-bs-content="This popover is themed via CSS variables.">
+                                <a href="{% url 'employee:create-contract' %}" style="text-decoration: none;color:white">Create</a>
+                            </button> 
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control pt-2" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+                    <datalist id="datalistOptions">
+                        <option value="San Francisco">
+                        <option value="New York">
+                        <option value="Seattle">
+                        <option value="Los Angeles">
+                        <option value="Chicago">
+                    </datalist>
+                    <div class="mt-2">
+                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                            <div class="btn-group p-2" role="group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-filter"></i>Filters
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                <li><a class="dropdown-item" href="">Purchase</a></li>
+                                <li><a class="dropdown-item" href="">Purchase Orders</a></li>
+                                <li><a class="dropdown-item" href="">RFQs</a></li>
+                                <li><a class="dropdown-item" href="">Requisition</a></li>
+                                </ul>
+                            </div>
+                            <div class="btn-group p-2" role="group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-bars"></i> Group By
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                <li><a class="dropdown-item" href="">Vendor</a></li>
+                                <li><a class="dropdown-item" href="">Purchase Representative</a></li>
+                                </ul>
+                            </div>
+                        
+                            <div class="btn-group p-2" role="group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-star-fill"></i> Favorites
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                <li><a class="dropdown-item" href="">Dropdown link</a></li>
+                                <li><a class="dropdown-item" href="">Dropdown link</a></li>
+                            </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of filters and search sections -->
+            <hr class="m-0">
+            <div class="row g-4 w-100">               
+                <!-- employees -->
+                {% if contracts %}
+                    {% for contract in contracts %}
+                        <div class="col-md-2">
+                            <a href="{% url 'employee:view-contract' contract.id %}" class="text-decoration-none contract-link">
+                                <div class="contract">
+                                    <div class="contract-body">
+                                        <h4>{{contract.employee}}</h4>
+                                        <span class="contract-tag tag-pink">{{contract.job_position}}</span>
+                                        <div class="user position-relative">
+                                            {% if contract.employee_set.all %}
+                                                <img src="{{contract.employee.profile_pix.url}}" alt="user" />
+                                            {% else %}
+                                                <img src="{% static 'img/student-avatar-male.png' %}" alt="user" />
+                                            {% endif %}
+                                            {% if contract.status == "New" %}
+                                                <span class="position-absolute top-0 start-100 translate-middle p-2 bg-secondary border border-light rounded-circle">
+                                                    <span class="visually-hidden"></span>
+                                                </span>
+                                            {% elif contract.status == "Running" %}
+                                                <span class="position-absolute top-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle">
+                                                    <span class="visually-hidden"></span>
+                                                </span>
+                                            {% else %}
+                                                <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                                                    <span class="visually-hidden"></span>
+                                                </span>
+                                            {% endif %}                  
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-md-5 mx-auto mt-3">
+                        <h5 class="text-center">Create a new Employee contract in your Contarct Directory.</h5>
+                        <p class="lead text-center">This app helps you easily track all activities related to an employee.</p>
+                    </div>                                
+                {% endif %}                        
+            </div>
+        </div>
+    </section>
+{% endblock container %}

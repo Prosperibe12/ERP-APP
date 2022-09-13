@@ -1,0 +1,103 @@
+{% extends "employeebase.html" %}
+{% load static %}
+{% block style %}
+    <style>
+        .errorlist li{
+            color: red;
+        }
+    </style>
+{% endblock style %}
+{% block title %}
+    {{Title}}
+{% endblock title %}
+
+{% block container %}
+    <section id="section-vendor">
+        <div class="container-fluid">
+            <!-- filters and search sections -->
+            <div class="row justify-content-center">
+                <nav aria-label="breadcrumb" class="mt-3">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="{% url 'employee:job-list' %}" class="lead">Job Position</a></li>
+                      <li class="breadcrumb-item active text-muted" aria-current="page">{{jobposition.name}}</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- end of filters and search sections -->
+        </div>
+        <hr class="m-0">
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 mx-auto border">
+                    <div class="row g-3 mt-3">
+                        {% if jobposition %}
+                            <div class="col-md-6 my-1">
+                                <label for="" class="form-label fw-bold">Job Position Name:</label> <br>
+                                {{jobposition.name}}
+                            </div>
+                            <div class="col-md-6 my-1">
+                                <label for="" class="form-label fw-bold">Expected No of Employee:</label> <br>
+                                {{jobposition.no_employee}}
+                            </div>
+                            <div class="col-md-6 my-1">
+                                <label for="" class="form-label fw-bold">Job Location:</label> <br>
+                                <p>Relational Technologies Limited <br>
+                                Plot 1b Ibadan Close, Opebi, Ikeja, Lagos.
+                                </p>
+                            </div>
+                            <div class="col-md-6 my-1">
+                                <label for="" class="form-label fw-bold">Job Description:</label> <br>
+                                {{jobposition.job_description}}
+                            </div>
+                            <div class="mb-1 col-md-5">
+                                {% for group in request.user.groups.all %}
+                                    {% if group.name == "HR & Development" %}
+                                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" id="action">Update</button>
+                                        {% if perms.employees.delete_jobposition %}
+                                            <button type="button" class="btn" data-bs-toggle="popover" data-bs-placement="right" data-bs-custom-class="custom-popover" id="action" data-bs-content="This popover is themed via CSS variables.">
+                                                <a href="{% url 'employee:delete-position' jobposition.id %}" style="text-decoration: none;color:white">Delete</a>
+                                            </button>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endif %}                           
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Job Position</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Job Position:</label>
+                            {{form.name}} <br> {{form.name.errors}}
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Job Description:</label> <br>
+                            {{form.job_description}} <br> {{form.job_description.errors}}
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">No of Employee:</label> <br>
+                            {{form.no_employee}} <br> {{form.no_employee.errors}}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn" id="action">Update</button>
+                            <button type="button" class="btn" data-bs-dismiss="modal" id="action">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock container %}

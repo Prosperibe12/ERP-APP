@@ -1,0 +1,139 @@
+{% extends "employeebase.html" %}
+{% load static %}
+{% block title %}
+    {{Title}}
+{% endblock title %}
+
+{% block container %}
+    <!-- section head -->
+
+    <!-- section content -->
+    <section id="section-vendor">
+        <div class="container-fluid">
+            <!-- filters and search sections -->
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="h5 py-2">Employees</div>
+                    {% for group in request.user.groups.all %}
+                        {% if group.name == "HR & Development" %}
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="popover" data-bs-placement="right" data-bs-custom-class="custom-popover" title="Let's create your Employee" data-bs-content="This popover is themed via CSS variables.">
+                                <a href="{% url 'employee:create-employee' %}" style="text-decoration: none;color:white">Create</a>
+                            </button>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control pt-2" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+                    <datalist id="datalistOptions">
+                        <option value="San Francisco">
+                        <option value="New York">
+                        <option value="Seattle">
+                        <option value="Los Angeles">
+                        <option value="Chicago">
+                    </datalist>
+                    <div class="mt-2">
+                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                            <div class="btn-group p-2" role="group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-filter"></i>Filters
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                <li><a class="dropdown-item" href="">Purchase</a></li>
+                                <li><a class="dropdown-item" href="">Purchase Orders</a></li>
+                                <li><a class="dropdown-item" href="">RFQs</a></li>
+                                <li><a class="dropdown-item" href="">Requisition</a></li>
+                                </ul>
+                            </div>
+                            <div class="btn-group p-2" role="group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-bars"></i> Group By
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                <li><a class="dropdown-item" href="">Vendor</a></li>
+                                <li><a class="dropdown-item" href="">Purchase Representative</a></li>
+                                </ul>
+                            </div>
+                        
+                            <div class="btn-group p-2" role="group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-star-fill"></i> Favorites
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                <li><a class="dropdown-item" href="">Dropdown link</a></li>
+                                <li><a class="dropdown-item" href="">Dropdown link</a></li>
+                            </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of filters and search sections -->
+            <hr class="m-0">
+            <div class="row justify-content-center vendor-list">
+                <!-- departments -->
+                <div class="col-md-2 border mt-1">
+                    <div class="row">
+                        <div class="mt-2 d-flex d-flex justify-content-start">
+                            <span class="mx-1"><i class="bi bi-people-fill" style="color: purple;"></i></span>
+                           <span class="fw-bold text-muted">DEPARMENTS</span> 
+                        </div>
+                        <!-- department list -->
+                        <ul class="list-group my-2">
+                            {% if departments %}
+                                <a href="" class="my-2 list-group-item d-flex justify-content-between align-items-center">{{departments.name}}
+                                    <span class="badge badge-primary badge-pill bg-dark">{{employee_count}}</span>
+                                </a>
+                            {% else %}
+                                <a href="#" class="my-2 list-group-item d-flex justify-content-between align-items-center">Dapibus ac facilisis in
+                                    <span class="badge badge-primary badge-pill bg-dark">14</span>
+                                </a>
+                                <a href="#" class="my-2 list-group-item d-flex justify-content-between align-items-center">Dapibus ac facilisis in
+                                    <span class="badge badge-primary badge-pill bg-dark">14</span>
+                                </a>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <!-- end of department -->
+                
+                <!-- employees -->
+                <div class="col-md-10 employee-list mt-1">
+                    <div class="row">
+                        {% if employees %}
+                           {% for employee in employees %}
+                                <div class="col-md-4 col-sm-12 vendor_olist mt-1">
+                                    <div class="card mb-3 vendor-data" style="max-width: 340px;">
+                                        <div class="row g-0">
+                                            <a href="{% url 'employee:employee-view' employee.id %}">
+                                                <div class="col-md-4">
+                                                    {% if employee.profile_pix %}
+                                                        <img src="{{employee.profile_pix.url}}" height="120" width="120" alt="my_image">
+                                                    {% else %}
+                                                        <img src="{% static 'img/student-avatar-male.png' %}" class="img-fluid" alt="my_image">
+                                                    {% endif %}                                                   
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">{{employee.full_name}}</h5>
+                                                        <h5 class="card-title">{{employee.dept}}</h5>
+                                                        <p class="card-text">{{employee.job_position}}</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                           {% endfor %}
+                        {% else %}
+                            <div class="col-md-5 mx-auto mt-3">
+                                <h5 class="text-center">Create a new Employee in your Employee Directory.</h5>
+                                <p class="lead text-center">This app helps you easily track all activities related to an employee.</p>
+                            </div>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock container %}

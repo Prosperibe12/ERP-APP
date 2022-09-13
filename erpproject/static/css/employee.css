@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300&family=Open+Sans:wght@300;500&family=Roboto:ital,wght@0,300;0,500;1,100&family=Source+Sans+Pro:wght@300;400&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: all 2s ease;
+    text-decoration: none;
+    list-style: none;
+    line-height: 1.1rem;
+}
+
+body{
+    font-family: 'Nunito', sans-serif;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+:root {
+    --primary: #06A3DA;
+    --secondary: #F57E57;
+    --light: #EEF9FF;
+    --dark: #091E3E;
+}
+header nav{
+    background-color: #A6808C;
+}
+.btn:focus,input {
+    outline: none !important;
+    box-shadow: none;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus, .form-control:focus{
+    outline:none;
+    box-shadow:none;
+}
+.form-control, .form-select{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+}
+
+.form-select:focus{
+    outline:none;
+    box-shadow:none;
+}
+
+.o_text a{
+    text-decoration: none;
+    color: white;
+}
+section .container-fluid .row nav ol li a{
+    text-decoration: none;
+    font-weight: 400;
+    color: black;
+}
+section .container-fluid .row div .btn{
+   background-color: #A6808C;
+   color: white;
+   border-radius: 0rem;
+}
+
+#action{
+   background-color: #A6808C;
+   color: white;
+   border-radius: 0rem;
+}
+
+#section-vendor .container .row div .row form div .btn{
+   background-color: #A6808C;
+   color: white;
+   border-radius: 0rem;
+}
+
+#orders-count{
+    text-decoration: none;
+    color: black;
+}
+.container .row div .row .stat{
+    border: 1px solid rgba(0, 0, 0, 0.199);
+    height: 45px;
+}
+#section-vendor .container-fluid .vendor-list .employee-list .row .vendor_olist .vendor-data div a{
+    display: flex;
+    text-decoration: none;
+    color: black;
+}
+.contract-link{
+    color: black;
+}
+.contract{
+    margin: 5px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 250px;
+}
+.contract-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10px;
+    min-height: 130px;
+} 
+.contract-tag{
+    background: #cccccc;
+    border-radius: 50px;
+    font-size: 12px;
+    margin: 0;
+    color: #fff;
+    padding: 2px 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.tag-pink {
+    background-color: #A6808C;
+} 
+.user{
+    display: flex;
+    margin-top: auto;
+} 
+.user img{
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+.user-info h5 {
+    margin: 0;
+}

@@ -1,0 +1,48 @@
+<!-- Topbar Start -->
+<div class="container-fluid bg-light ps-5 pe-0 d-none d-lg-block">
+    <div class="row gx-0">
+        <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
+            <div class="d-inline-flex align-items-center">
+                <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon - Friday : 8:00 am - 5:00 pm, Saturday & Sunday: Closed </small>
+            </div>
+        </div>
+        <div class="col-md-6 text-center text-lg-end">
+            <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
+                <div class="me-3 pe-3 border-end py-2">
+                    <p class="m-0"><i class="fa fa-envelope-open me-2"></i>Prosperibe12@rediffmail.com</p>
+                </div>
+                <div class="py-2">
+                    <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+2347031465663</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Topbar End -->
+
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0 position-relative">
+    <a href="{% url 'web:index' %}" class="navbar-brand p-0">
+        <h1 class="m-0 text-primary"><i class="fa fa-server me-2"></i>Для </h1>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto py-0">
+            <a href="{% url 'web:index' %}" class="nav-item nav-link active">Home</a>
+            <a href="{% url 'web:about' %}" class="nav-item nav-link">About</a>
+            <a href="{% url 'web:services' %}" class="nav-item nav-link">Services</a>
+            <div class="nav-item dropdown">
+                <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                <div class="dropdown-menu m-0">
+                    <a href="{% url 'login' %}" class="dropdown-item">Login</a>
+                    <a href="{% url 'web:careers' %}" class="dropdown-item">Careers</a>
+                </div>
+            </div>
+            <a href="{% url 'web:contact' %}" class="nav-item nav-link">Contact</a>
+        </div>
+        <a href="{% url 'web:appointment' %}" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
+    </div>
+</nav>
+<!-- Navbar End -->

@@ -1,0 +1,46 @@
+{% extends "dashbase.html" %}
+{% load static %}
+{% block title %}
+    {{Title}}
+{% endblock title %}
+
+{% block container %}
+    <section>
+        <div class="container" style="margin-top: 200px;">
+            <div class="row justify-content-center">
+                <div class="col-3 col-sm-1">
+                    <div class="menu text-center" id="menuicon">
+                        <a href="{% url 'employee:employee-list' %}" class="o_menuitem">
+                            <img src="{% static 'img/employees.png' %}" alt="" height="40px" width="40px" class=" mt-1">
+                            <p>Employees</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-3 col-sm-1">
+                <div class="menu text-center" id="menuapp">
+                        <a href="" class="o_menuitem">
+                            <img src="{% static 'img/star.png' %}" alt="" height="40px" width="40px" class=" mt-1">
+                            <p>Appraisal</p>
+                        </a>
+                </div>
+                </div>
+                <div class="col-3 col-sm-1">
+                <div class="menu text-center" id="menupay">
+                        <a href="" class="o_menuitem">
+                            <img src="{% static 'img/salary.png' %}" alt="" height="40px" width="40px" class=" mt-1">
+                            <p>Payroll</p>
+                        </a>
+                </div>
+                </div>
+                <div class="col-3 col-sm-1">
+                    <div class="menu text-center"  id="menupur">
+                        <a href="" class="o_menuitem">
+                            <img src="{% static 'img/credit-card (1).png' %}" alt="" height="40px" width="40px" class=" mt-1">
+                            <p>Purchase</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock container %}

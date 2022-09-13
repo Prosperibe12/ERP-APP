@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,900&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: all 2s ease;
+    text-decoration: none;
+    list-style: none;
+    line-height: 1.1rem;
+}
+
+body{
+    font-family: 'Lato', sans-serif;
+    background-color: #A6808C;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+:root {
+    --primary: #06A3DA;
+    --secondary: #F57E57;
+    --light: #EEF9FF;
+    --dark: #091E3E;
+}
+
+.o_menuitem{
+  text-decoration: none;
+}
+.o_menuitem p{
+    text-decoration: none;
+    color: whitesmoke 
+}
+#menuicon{
+    height: 70px;
+    background-color: #218380;
+    border-radius: .2rem;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+#menuapp{
+    height: 70px;
+    background-color: #754043;
+    border-radius: .2rem;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+#menupay{
+    height: 70px;
+    background-color: #772E25;
+    border-radius: .2rem;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+#menupur{
+    height: 70px;
+    background-color: var(--primary);
+    border-radius: .2rem;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.menu:hover  {
+    margin:-5px 0 0 0;
+}
